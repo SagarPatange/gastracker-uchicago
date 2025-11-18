@@ -1,0 +1,216 @@
+{
+  "summary": {
+    "total_violations": 16,
+    "critical_violations": 3,
+    "total_incident_cost": 9500,
+    "monthly_rental_waste": 9.18,
+    "total_preventable_cost": 9527.54
+  },
+  "critical_incidents": [
+    {
+      "date": "2025-09-02",
+      "room": "Room 292",
+      "gas_type": "Compressed Argon Cylinder",
+      "meter": "left",
+      "psi": 200.0,
+      "severity": "CRITICAL",
+      "estimated_cost": 1000
+    },
+    {
+      "date": "2025-09-02",
+      "room": "Room 292",
+      "gas_type": "Compressed Argon Cylinder",
+      "meter": "right",
+      "psi": 200.0,
+      "severity": "CRITICAL",
+      "estimated_cost": 1000
+    },
+    {
+      "date": "2025-10-15",
+      "room": "Room 278",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "meter": "left",
+      "psi": 200.0,
+      "severity": "CRITICAL",
+      "estimated_cost": 1000
+    },
+    {
+      "date": "2025-07-17",
+      "room": "Room 306",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "meter": "left",
+      "psi": 300.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-10-07",
+      "room": "Room 292",
+      "gas_type": "Compressed Argon Cylinder",
+      "meter": "right",
+      "psi": 300.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-10-08",
+      "room": "Room 292",
+      "gas_type": "Compressed Argon Cylinder",
+      "meter": "right",
+      "psi": 300.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-10-14",
+      "room": "Room 278",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "meter": "left",
+      "psi": 300.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-10-15",
+      "room": "Room 392",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "meter": "right",
+      "psi": 300.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-09-23",
+      "room": "Room 292",
+      "gas_type": "Compressed Argon Cylinder",
+      "meter": "left",
+      "psi": 350.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-10-02",
+      "room": "Room 306",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "meter": "left",
+      "psi": 350.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-07-09",
+      "room": "Room 392",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "meter": "left",
+      "psi": 400.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-07-25",
+      "room": "Room 306",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "meter": "left",
+      "psi": 400.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-07-28",
+      "room": "Room 292",
+      "gas_type": "Compressed Argon Cylinder",
+      "meter": "left",
+      "psi": 400.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-09-08",
+      "room": "Room 306",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "meter": "left",
+      "psi": 400.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-09-22",
+      "room": "Room 292",
+      "gas_type": "Compressed Argon Cylinder",
+      "meter": "left",
+      "psi": 400.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    },
+    {
+      "date": "2025-10-13",
+      "room": "Room 278",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "meter": "left",
+      "psi": 400.0,
+      "severity": "WARNING",
+      "estimated_cost": 500
+    }
+  ],
+  "rental_waste": [
+    {
+      "room": "Room 208",
+      "gas": "Compressed Argon Cylinder",
+      "unused_cylinders": 4,
+      "days_unused": 19,
+      "wasted_rental_cost": 6.84
+    },
+    {
+      "room": "Room 292",
+      "gas": "Compressed Argon Cylinder",
+      "unused_cylinders": 4,
+      "days_unused": 26,
+      "wasted_rental_cost": 9.36
+    },
+    {
+      "room": "Room 306",
+      "gas": "Carbon Dioxide ( Bone dry)",
+      "unused_cylinders": 2,
+      "days_unused": 23,
+      "wasted_rental_cost": 4.14
+    },
+    {
+      "room": "Room 392",
+      "gas": "Carbon Dioxide ( Bone dry)",
+      "unused_cylinders": 4,
+      "days_unused": 20,
+      "wasted_rental_cost": 7.2
+    }
+  ],
+  "consumption_patterns": {
+    "Room 392": {
+      "avg_daily_consumption": 67.0,
+      "max_daily_consumption": 150.0,
+      "volatility": "LOW"
+    },
+    "Room 306": {
+      "avg_daily_consumption": 83.2,
+      "max_daily_consumption": 300.0,
+      "volatility": "HIGH"
+    },
+    "Room 292": {
+      "avg_daily_consumption": 252.7,
+      "max_daily_consumption": 1100.0,
+      "volatility": "HIGH"
+    },
+    "Room 278": {
+      "avg_daily_consumption": 1421.0,
+      "max_daily_consumption": 2100.0,
+      "volatility": "HIGH"
+    }
+  },
+  "worst_incident": {
+    "date": "2025-09-02",
+    "room": "Room 292",
+    "gas_type": "Compressed Argon Cylinder",
+    "meter": "left",
+    "psi": 200.0,
+    "severity": "CRITICAL",
+    "estimated_cost": 1000
+  }
+}

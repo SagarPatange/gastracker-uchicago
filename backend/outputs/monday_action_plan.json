@@ -1,0 +1,46 @@
+{
+  "generated_at": "2025-11-15T20:18:02.612663",
+  "immediate_actions": [
+    {
+      "action": "ORDER",
+      "room": "Room 306",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "quantity": 1,
+      "order_day": "Monday",
+      "urgency": "HIGH",
+      "reason": "1.8 days until critical, burning 84 PSI/day"
+    },
+    {
+      "action": "ORDER",
+      "room": "Room 392",
+      "gas_type": "Carbon Dioxide ( Bone dry)",
+      "quantity": 1,
+      "order_day": "Monday",
+      "urgency": "HIGH",
+      "reason": "1.2 days until critical, burning 300 PSI/day"
+    }
+  ],
+  "reallocations": [],
+  "routine_orders": [
+    {
+      "action": "ORDER",
+      "room": "Room 278",
+      "gas_type": "Compressed Argon Cylinder",
+      "quantity": 2,
+      "order_day": "Thursday",
+      "urgency": "NORMAL",
+      "reason": "4.1 days until critical, burning 483 PSI/day"
+    }
+  ],
+  "savings": {
+    "prevented_stockouts": 0,
+    "stockout_savings": 0,
+    "rental_savings": 0.0,
+    "batch_savings": 5.0,
+    "total_weekly_savings": 5.0
+  },
+  "monday_checklist": [
+    "\u2713 ORDER - Room 306",
+    "\u2713 ORDER - Room 392"
+  ]
+}

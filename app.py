@@ -1,3 +1,13 @@
+import tempfile
+import shutil
+from pathlib import Path
+
+# Import backend modules
+import sys
+sys.path.append(str(Path(__file__).parent))
+from backend.src.priority2_adaptive_predictor import AdaptivePredictor
+from backend.src.priority3_order_optimizer import OrderOptimizer
+
 import streamlit as st
 import pandas as pd
 import json
@@ -109,18 +119,54 @@ def load_inventory(file):
         for col in required_columns:
             if col not in df.columns:
                 st.error(f"❌ Missing required column: {col}")
-                return None
+                return None, None
         
         # Calculate days remaining if not present
         if 'Days_Remaining' not in df.columns:
             # Simple estimation: PSI / 100 = days (adjust based on actual consumption)
             df['Days_Remaining'] = (df['PSI'] / 100).round(1)
         
-        return df
+        return df, file
     except Exception as e:
         st.error(f"❌ Error reading Excel file: {e}")
         st.info("Make sure your Excel file has columns: Room, Gas_Type, PSI")
-        return None
+        return None, None
+
+@st.cache_data(ttl=30)
+def run_backend_analysis(file_bytes):
+    """Run the adaptive predictor on uploaded file"""
+    try:
+        # Create temporary directory for processing
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # Save uploaded file to temp location
+            temp_path = Path(tmpdir) / "inventory_levels.xlsx"
+            with open(temp_path, 'wb') as f:
+                f.write(file_bytes.getvalue())
+            
+            # Run adaptive predictor
+            predictor = AdaptivePredictor(excel_path=str(temp_path))
+            forecast = predictor.generate_weekly_forecast()
+            
+            # Run order optimizer
+            # Save forecast temporarily for optimizer
+            forecast_path = Path(tmpdir) / "weekly_forecast.json"
+            with open(forecast_path, 'w') as f:
+                json.dump(forecast, f)
+            
+            # Create outputs directory
+            outputs_dir = Path(tmpdir) / "outputs"
+            outputs_dir.mkdir(exist_ok=True)
+            shutil.copy(forecast_path, outputs_dir / "weekly_forecast.json")
+            
+            # Run optimizer
+            optimizer = OrderOptimizer()
+            optimizer.forecast = forecast  # Pass forecast directly
+            action_plan = optimizer.generate_action_plan()
+            
+            return forecast, action_plan
+    except Exception as e:
+        st.error(f"❌ Error running predictions: {e}")
+        return None, None
 
 # Check if file is uploaded
 if uploaded_file is None:
@@ -155,12 +201,16 @@ if uploaded_file is None:
     st.stop()
 
 # Load the data
-df = load_inventory(uploaded_file)
+df, uploaded_file_bytes = load_inventory(uploaded_file)
 
 if df is None:
     st.stop()
 
-# Calculate categories
+# Run backend predictions
+with st.spinner("🔮 Running smart predictions..."):
+    forecast, action_plan = run_backend_analysis(uploaded_file)
+
+# Calculate categories (basic thresholds)
 critical = df[df['PSI'] < 500]
 warning = df[(df['PSI'] >= 500) & (df['PSI'] < 1000)]
 stable = df[df['PSI'] >= 1000]
@@ -191,6 +241,49 @@ with col3:
         delta=f"{len(stable)} rooms in good condition",
         delta_color="normal"
     )
+
+# Smart Predictions Banner (if available)
+if forecast and action_plan:
+    st.markdown("---")
+    st.markdown("### 🔮 AI-Powered Predictions")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        urgent_orders = len(action_plan.get('immediate_actions', []))
+        st.metric(
+            label="⚡ Urgent Orders (Monday)",
+            value=urgent_orders,
+            delta=f"{urgent_orders} rooms need ordering NOW" if urgent_orders > 0 else "None",
+            delta_color="inverse"
+        )
+    
+    with col2:
+        routine_orders = len(action_plan.get('routine_orders', []))
+        st.metric(
+            label="📋 Routine Orders (This Week)",
+            value=routine_orders,
+            delta=f"Can batch order Thursday" if routine_orders > 0 else "None",
+            delta_color="normal"
+        )
+    
+    with col3:
+        savings = action_plan.get('savings', {}).get('total_weekly_savings', 0)
+        st.metric(
+            label="💰 Estimated Weekly Savings",
+            value=f"${savings:.0f}",
+            delta="vs reactive ordering"
+        )
+    
+    # Show immediate action items
+    if action_plan.get('immediate_actions'):
+        st.warning("⚡ **MONDAY MORNING ACTION ITEMS**")
+        for action in action_plan['immediate_actions']:
+            room = action['room']
+            reason = action['reason']
+            qty = action.get('quantity', 1)
+            st.markdown(f"- **{room}**: Order {qty} cylinder(s) - {reason}")
+
 
 st.markdown("---")
 
@@ -260,6 +353,8 @@ with st.expander("📋 View Complete Inventory", expanded=False):
 
 # Summary statistics
 st.markdown("---")
+
+
 st.subheader("📊 Inventory Summary")
 
 col1, col2, col3, col4 = st.columns(4)
@@ -277,6 +372,48 @@ with col4:
     if 'Days_Remaining' in df.columns:
         st.metric("Avg Days Left", f"{df['Days_Remaining'].mean():.1f}")
 
+
+# Detailed Forecast View
+if forecast:
+    st.markdown("---")
+    with st.expander("🔮 7-Day Smart Forecast (AI Predictions)", expanded=False):
+        st.markdown("**Predictive analytics based on historical consumption patterns**")
+        
+        for room, data in forecast.get('room_forecasts', {}).items():
+            if 'error' not in data:
+                st.markdown(f"#### {room}")
+                
+                col1, col2, col3, col4 = st.columns(4)
+                
+                with col1:
+                    st.metric("Current PSI", f"{data.get('current_psi', 0):.0f}")
+                
+                with col2:
+                    regime = data.get('regime', 'UNKNOWN')
+                    regime_emoji = "🔥" if regime == "HIGH_EXPERIMENT" else "✅" if regime == "NORMAL" else "💤"
+                    st.metric("Operating Mode", f"{regime_emoji} {regime}")
+                
+                with col3:
+                    st.metric("Daily Burn Rate", f"{data.get('avg_daily_burn', 0):.0f} PSI/day")
+                
+                with col4:
+                    days_left = data.get('days_until_critical', 999)
+                    color = "🔴" if days_left < 2 else "🟡" if days_left < 5 else "🟢"
+                    st.metric("Days to Critical", f"{color} {days_left:.1f}")
+                
+                # Recommendation
+                recommendation = data.get('recommendation', 'UNKNOWN')
+                if recommendation == 'SWAP_IMMEDIATELY':
+                    st.error(f"🚨 **{recommendation.replace('_', ' ')}**")
+                elif recommendation in ['ORDER_TODAY_URGENT', 'ORDER_THIS_WEEK']:
+                    st.warning(f"⚠️ **{recommendation.replace('_', ' ')}**")
+                elif recommendation == 'MONITOR_CLOSELY':
+                    st.info(f"👀 **{recommendation.replace('_', ' ')}**")
+                else:
+                    st.success(f"✅ **{recommendation.replace('_', ' ')}**")
+                
+                st.markdown("---")
+                
 # Auto-refresh logic
 if auto_refresh:
     time.sleep(refresh_interval)

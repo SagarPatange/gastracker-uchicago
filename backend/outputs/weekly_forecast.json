@@ -1,0 +1,301 @@
+{
+  "generated_at": "2025-11-15T20:14:40.972835",
+  "critical_rooms": [
+    "Room 306",
+    "Room 392"
+  ],
+  "order_schedule": [
+    {
+      "room": "Room 306",
+      "urgency": "CRITICAL",
+      "current_psi": 650.0,
+      "days_remaining": 1.8
+    },
+    {
+      "room": "Room 278",
+      "urgency": "NORMAL",
+      "current_psi": 2500.0,
+      "days_remaining": 4.1
+    },
+    {
+      "room": "Room 392",
+      "urgency": "CRITICAL",
+      "current_psi": 850.0,
+      "days_remaining": 1.2
+    }
+  ],
+  "room_forecasts": {
+    "Room 292": {
+      "room": "Room 292",
+      "regime": "NORMAL",
+      "current_psi": 2500.0,
+      "avg_daily_burn": 177.6,
+      "volatility": "HIGH",
+      "days_until_critical": 11.3,
+      "days_until_empty": 14.1,
+      "forecast": [
+        {
+          "day": 1,
+          "date": "2025-11-16",
+          "expected_consumption": 88.8,
+          "worst_case_consumption": 327.9,
+          "predicted_psi": 2322.4,
+          "confidence": "LOW"
+        },
+        {
+          "day": 2,
+          "date": "2025-11-17",
+          "expected_consumption": 177.6,
+          "worst_case_consumption": 416.7,
+          "predicted_psi": 2144.8,
+          "confidence": "LOW"
+        },
+        {
+          "day": 3,
+          "date": "2025-11-18",
+          "expected_consumption": 177.6,
+          "worst_case_consumption": 416.7,
+          "predicted_psi": 1967.3,
+          "confidence": "LOW"
+        },
+        {
+          "day": 4,
+          "date": "2025-11-19",
+          "expected_consumption": 177.6,
+          "worst_case_consumption": 416.7,
+          "predicted_psi": 1789.7,
+          "confidence": "LOW"
+        },
+        {
+          "day": 5,
+          "date": "2025-11-20",
+          "expected_consumption": 177.6,
+          "worst_case_consumption": 416.7,
+          "predicted_psi": 1612.1,
+          "confidence": "LOW"
+        },
+        {
+          "day": 6,
+          "date": "2025-11-21",
+          "expected_consumption": 177.6,
+          "worst_case_consumption": 416.7,
+          "predicted_psi": 1434.5,
+          "confidence": "LOW"
+        },
+        {
+          "day": 7,
+          "date": "2025-11-22",
+          "expected_consumption": 88.8,
+          "worst_case_consumption": 327.9,
+          "predicted_psi": 1256.9,
+          "confidence": "LOW"
+        }
+      ],
+      "recommendation": "OK_FOR_NOW"
+    },
+    "Room 306": {
+      "room": "Room 306",
+      "regime": "NORMAL",
+      "current_psi": 650.0,
+      "avg_daily_burn": 83.6,
+      "volatility": "MEDIUM",
+      "days_until_critical": 1.8,
+      "days_until_empty": 7.8,
+      "forecast": [
+        {
+          "day": 1,
+          "date": "2025-11-16",
+          "expected_consumption": 41.8,
+          "worst_case_consumption": 189.7,
+          "predicted_psi": 566.4,
+          "confidence": "LOW"
+        },
+        {
+          "day": 2,
+          "date": "2025-11-17",
+          "expected_consumption": 83.6,
+          "worst_case_consumption": 231.5,
+          "predicted_psi": 482.7,
+          "confidence": "LOW"
+        },
+        {
+          "day": 3,
+          "date": "2025-11-18",
+          "expected_consumption": 83.6,
+          "worst_case_consumption": 231.5,
+          "predicted_psi": 399.1,
+          "confidence": "LOW"
+        },
+        {
+          "day": 4,
+          "date": "2025-11-19",
+          "expected_consumption": 83.6,
+          "worst_case_consumption": 231.5,
+          "predicted_psi": 315.5,
+          "confidence": "LOW"
+        },
+        {
+          "day": 5,
+          "date": "2025-11-20",
+          "expected_consumption": 83.6,
+          "worst_case_consumption": 231.5,
+          "predicted_psi": 231.8,
+          "confidence": "LOW"
+        },
+        {
+          "day": 6,
+          "date": "2025-11-21",
+          "expected_consumption": 83.6,
+          "worst_case_consumption": 231.5,
+          "predicted_psi": 148.2,
+          "confidence": "LOW"
+        },
+        {
+          "day": 7,
+          "date": "2025-11-22",
+          "expected_consumption": 41.8,
+          "worst_case_consumption": 189.7,
+          "predicted_psi": 64.6,
+          "confidence": "LOW"
+        }
+      ],
+      "recommendation": "ORDER_TODAY_URGENT"
+    },
+    "Room 278": {
+      "room": "Room 278",
+      "regime": "HIGH_EXPERIMENT",
+      "current_psi": 2500.0,
+      "avg_daily_burn": 483.3,
+      "volatility": "HIGH",
+      "days_until_critical": 4.1,
+      "days_until_empty": 5.2,
+      "forecast": [
+        {
+          "day": 1,
+          "date": "2025-11-16",
+          "expected_consumption": 241.7,
+          "worst_case_consumption": 583.0,
+          "predicted_psi": 2016.7,
+          "confidence": "LOW"
+        },
+        {
+          "day": 2,
+          "date": "2025-11-17",
+          "expected_consumption": 483.3,
+          "worst_case_consumption": 824.7,
+          "predicted_psi": 1533.3,
+          "confidence": "LOW"
+        },
+        {
+          "day": 3,
+          "date": "2025-11-18",
+          "expected_consumption": 483.3,
+          "worst_case_consumption": 824.7,
+          "predicted_psi": 1050.0,
+          "confidence": "LOW"
+        },
+        {
+          "day": 4,
+          "date": "2025-11-19",
+          "expected_consumption": 483.3,
+          "worst_case_consumption": 824.7,
+          "predicted_psi": 566.7,
+          "confidence": "LOW"
+        },
+        {
+          "day": 5,
+          "date": "2025-11-20",
+          "expected_consumption": 483.3,
+          "worst_case_consumption": 824.7,
+          "predicted_psi": 83.3,
+          "confidence": "LOW"
+        },
+        {
+          "day": 6,
+          "date": "2025-11-21",
+          "expected_consumption": 483.3,
+          "worst_case_consumption": 824.7,
+          "predicted_psi": -400.0,
+          "confidence": "LOW"
+        },
+        {
+          "day": 7,
+          "date": "2025-11-22",
+          "expected_consumption": 241.7,
+          "worst_case_consumption": 583.0,
+          "predicted_psi": -883.3,
+          "confidence": "LOW"
+        }
+      ],
+      "recommendation": "ORDER_THIS_WEEK"
+    },
+    "Room 392": {
+      "room": "Room 392",
+      "regime": "HIGH_EXPERIMENT",
+      "current_psi": 850.0,
+      "avg_daily_burn": 300.0,
+      "volatility": "MEDIUM",
+      "days_until_critical": 1.2,
+      "days_until_empty": 2.8,
+      "forecast": [
+        {
+          "day": 1,
+          "date": "2025-11-16",
+          "expected_consumption": 150.0,
+          "worst_case_consumption": 276.7,
+          "predicted_psi": 550.0,
+          "confidence": "LOW"
+        },
+        {
+          "day": 2,
+          "date": "2025-11-17",
+          "expected_consumption": 300.0,
+          "worst_case_consumption": 426.7,
+          "predicted_psi": 250.0,
+          "confidence": "LOW"
+        },
+        {
+          "day": 3,
+          "date": "2025-11-18",
+          "expected_consumption": 300.0,
+          "worst_case_consumption": 426.7,
+          "predicted_psi": -50.0,
+          "confidence": "LOW"
+        },
+        {
+          "day": 4,
+          "date": "2025-11-19",
+          "expected_consumption": 300.0,
+          "worst_case_consumption": 426.7,
+          "predicted_psi": -350.0,
+          "confidence": "LOW"
+        },
+        {
+          "day": 5,
+          "date": "2025-11-20",
+          "expected_consumption": 300.0,
+          "worst_case_consumption": 426.7,
+          "predicted_psi": -650.0,
+          "confidence": "LOW"
+        },
+        {
+          "day": 6,
+          "date": "2025-11-21",
+          "expected_consumption": 300.0,
+          "worst_case_consumption": 426.7,
+          "predicted_psi": -950.0,
+          "confidence": "LOW"
+        },
+        {
+          "day": 7,
+          "date": "2025-11-22",
+          "expected_consumption": 150.0,
+          "worst_case_consumption": 276.7,
+          "predicted_psi": -1250.0,
+          "confidence": "LOW"
+        }
+      ],
+      "recommendation": "ORDER_TODAY_URGENT"
+    }
+  }
+}
