@@ -1,0 +1,218 @@
+/* ============================================
+   GAS TRACKER DASHBOARD - CUSTOM STYLES
+   ============================================ */
+
+/* === UChicago Branding === */
+:root {
+    --uchicago-maroon: #800000;
+    --uchicago-dark-gray: #767676;
+    --uchicago-light-gray: #D6D6CE;
+    --critical-red: #ff1744;
+    --warning-orange: #ff8c00;
+    --success-green: #20c997;
+}
+
+/* === Main Layout === */
+.main {
+    background-color: #f8f9fa;
+}
+
+/* === Headers === */
+h1 {
+    color: var(--uchicago-maroon) !important;
+    font-weight: 700;
+    border-bottom: 3px solid var(--uchicago-maroon);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: var(--uchicago-dark-gray);
+    font-weight: 600;
+}
+
+h3 {
+    color: var(--uchicago-maroon);
+    font-weight: 600;
+}
+
+/* === Sidebar === */
+[data-testid="stSidebar"] {
+    background-color: #ffffff;
+    border-right: 2px solid var(--uchicago-light-gray);
+}
+
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: var(--uchicago-maroon);
+}
+
+/* === Metrics === */
+[data-testid="stMetricValue"] {
+    font-size: 2.5rem !important;
+    font-weight: bold !important;
+}
+
+[data-testid="stMetricLabel"] {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: var(--uchicago-dark-gray);
+}
+
+/* === Alert Boxes === */
+.critical-alert {
+    background: linear-gradient(135deg, #ff4b4b 0%, var(--critical-red) 100%);
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+}
+
+.warning-alert {
+    background: linear-gradient(135deg, #ffa500 0%, var(--warning-orange) 100%);
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+}
+
+.success-alert {
+    background: linear-gradient(135deg, #28a745 0%, var(--success-green) 100%);
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+}
+
+/* === Buttons === */
+.stButton>button {
+    background-color: var(--uchicago-maroon);
+    color: white;
+    border-radius: 5px;
+    font-weight: 600;
+    border: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.stButton>button:hover {
+    background-color: #600000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+
+/* === File Uploader === */
+[data-testid="stFileUploader"] {
+    background-color: white;
+    border: 2px dashed var(--uchicago-light-gray);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* === DataFrames/Tables === */
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--uchicago-light-gray);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* === Expander === */
+[data-testid="stExpander"] {
+    background-color: white;
+    border: 1px solid var(--uchicago-light-gray);
+    border-radius: 8px;
+    margin: 0.5rem 0;
+}
+
+/* === Info/Warning/Error Boxes === */
+.stAlert {
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* === Download Button === */
+.stDownloadButton>button {
+    background-color: var(--success-green);
+    color: white;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.stDownloadButton>button:hover {
+    background-color: #1aa179;
+}
+
+/* === Caption Text === */
+.caption {
+    color: var(--uchicago-dark-gray);
+    font-size: 0.875rem;
+}
+
+/* === Divider === */
+hr {
+    border: none;
+    border-top: 2px solid var(--uchicago-light-gray);
+    margin: 2rem 0;
+}
+
+/* === Big Metric (Custom Class) === */
+.big-metric {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--uchicago-maroon);
+}
+
+/* === Professional Cards === */
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+/* === Status Badges === */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.status-critical {
+    background-color: var(--critical-red);
+    color: white;
+}
+
+.status-warning {
+    background-color: var(--warning-orange);
+    color: white;
+}
+
+.status-stable {
+    background-color: var(--success-green);
+    color: white;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    [data-testid="stMetricValue"] {
+        font-size: 1.5rem !important;
+    }
+    
+    .critical-alert,
+    .warning-alert,
+    .success-alert {
+        padding: 1rem;
+    }
+}

@@ -18,33 +18,23 @@ from io import BytesIO
 
 # Page configuration
 st.set_page_config(
-    page_title="Gas Inventory Manager",
-    page_icon="🔬",
+    page_title="ERC Gas Tracker | UChicago",
+    page_icon="⚗️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
-st.markdown("""
-<style>
-    .big-metric {
-        font-size: 2rem;
-        font-weight: bold;
-    }
-    .critical-alert {
-        background-color: #ff4b4b;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        color: white;
-    }
-    .warning-alert {
-        background-color: #ffa500;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        color: white;
-    }
-</style>
-""", unsafe_allow_html=True)
+# Load external CSS
+def load_css(file_name):
+    """Load CSS from external file"""
+    try:
+        with open(file_name) as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    except FileNotFoundError:
+        st.warning(f"⚠️ CSS file '{file_name}' not found. Using default styling.")
+
+# Load custom styles
+load_css('style.css')
 
 # Sidebar - File Upload
 with st.sidebar:
@@ -103,9 +93,13 @@ with st.sidebar:
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 
-# Main content
-st.title("🔬 Gas Inventory Dashboard")
-st.caption(f"Dashboard updated: {datetime.now().strftime('%B %d, %Y at %I:%M:%S %p')}")
+# Main Header
+col_logo, col_title = st.columns([1, 5])
+with col_title:
+    st.title("⚗️ Gas Inventory Dashboard")
+    st.markdown("**University of Chicago** | Energy Research Center")
+st.caption(f"Last updated: {datetime.now().strftime('%B %d, %Y at %I:%M:%S %p')}")
+st.markdown("---")
 
 # Load data function
 @st.cache_data(ttl=30)
@@ -215,41 +209,54 @@ critical = df[df['PSI'] < 500]
 warning = df[(df['PSI'] >= 500) & (df['PSI'] < 1000)]
 stable = df[df['PSI'] >= 1000]
 
-# Top metrics
+# Top metrics - Enhanced with better labels
+st.markdown("### 📊 Current Status Overview")
+
 col1, col2, col3 = st.columns(3)
 
 with col1:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown("#### 🔴 CRITICAL")
     st.metric(
-        label="🔴 CRITICAL - Order NOW",
+        label="Immediate Action Required",
         value=len(critical),
-        delta=f"{len(critical)} rooms need immediate attention" if len(critical) > 0 else "All clear",
+        delta=f"-{len(critical)} rooms" if len(critical) > 0 else "All clear ✓",
         delta_color="inverse"
     )
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown("#### 🟡 WARNING")
     st.metric(
-        label="🟡 WARNING - Order This Week",
+        label="Order This Week",
         value=len(warning),
-        delta=f"{len(warning)} rooms to monitor" if len(warning) > 0 else "All clear",
+        delta=f"-{len(warning)} rooms" if len(warning) > 0 else "All clear ✓",
         delta_color="inverse"
     )
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with col3:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown("#### 🟢 STABLE")
     st.metric(
-        label="🟢 STABLE",
+        label="Good Condition",
         value=len(stable),
-        delta=f"{len(stable)} rooms in good condition",
+        delta=f"+{len(stable)} rooms",
         delta_color="normal"
     )
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Smart Predictions Banner (if available)
 if forecast and action_plan:
     st.markdown("---")
     st.markdown("### 🔮 AI-Powered Predictions")
+    st.markdown("*Predictive analytics based on historical consumption patterns*")
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
+        st.markdown('<div class="card">', unsafe_allow_html=True)
         urgent_orders = len(action_plan.get('immediate_actions', []))
         st.metric(
             label="⚡ Urgent Orders (Monday)",
@@ -257,8 +264,10 @@ if forecast and action_plan:
             delta=f"{urgent_orders} rooms need ordering NOW" if urgent_orders > 0 else "None",
             delta_color="inverse"
         )
+        st.markdown('</div>', unsafe_allow_html=True)
     
     with col2:
+        st.markdown('<div class="card">', unsafe_allow_html=True)
         routine_orders = len(action_plan.get('routine_orders', []))
         st.metric(
             label="📋 Routine Orders (This Week)",
@@ -266,31 +275,37 @@ if forecast and action_plan:
             delta=f"Can batch order Thursday" if routine_orders > 0 else "None",
             delta_color="normal"
         )
+        st.markdown('</div>', unsafe_allow_html=True)
     
     with col3:
+        st.markdown('<div class="card">', unsafe_allow_html=True)
         savings = action_plan.get('savings', {}).get('total_weekly_savings', 0)
         st.metric(
             label="💰 Estimated Weekly Savings",
             value=f"${savings:.0f}",
             delta="vs reactive ordering"
         )
+        st.markdown('</div>', unsafe_allow_html=True)
     
     # Show immediate action items
     if action_plan.get('immediate_actions'):
-        st.warning("⚡ **MONDAY MORNING ACTION ITEMS**")
+        st.markdown('<div class="critical-alert">', unsafe_allow_html=True)
+        st.markdown("### ⚡ MONDAY MORNING ACTION ITEMS")
         for action in action_plan['immediate_actions']:
             room = action['room']
             reason = action['reason']
             qty = action.get('quantity', 1)
-            st.markdown(f"- **{room}**: Order {qty} cylinder(s) - {reason}")
-
+            st.markdown(f"**• {room}**: Order {qty} cylinder(s) - *{reason}*")
+        st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("---")
 
 # Critical alerts section
 if len(critical) > 0:
-    st.error("⚠️ **IMMEDIATE ACTION REQUIRED**")
-    st.markdown("### 🔴 Critical Rooms (PSI < 500)")
+    st.markdown('<div class="critical-alert">', unsafe_allow_html=True)
+    st.markdown("### ⚠️ IMMEDIATE ACTION REQUIRED")
+    st.markdown("#### 🔴 Critical Rooms (PSI < 500)")
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # Sort by PSI ascending (most critical first)
     critical_sorted = critical.sort_values('PSI')
@@ -311,8 +326,10 @@ if len(critical) > 0:
 
 # Warning section
 if len(warning) > 0:
-    st.warning("📋 **Order These This Week**")
-    st.markdown("### 🟡 Warning Rooms (PSI 500-1000)")
+    st.markdown('<div class="warning-alert">', unsafe_allow_html=True)
+    st.markdown("### 📋 Order These This Week")
+    st.markdown("#### 🟡 Warning Rooms (PSI 500-1000)")
+    st.markdown('</div>', unsafe_allow_html=True)
     
     warning_sorted = warning.sort_values('PSI')
     
@@ -332,7 +349,9 @@ if len(warning) > 0:
 
 # Stable rooms
 if len(stable) > 0:
-    st.success(f"✅ **{len(stable)} Rooms in Good Condition**")
+    st.markdown('<div class="success-alert">', unsafe_allow_html=True)
+    st.markdown(f"### ✅ {len(stable)} Rooms in Good Condition")
+    st.markdown('</div>', unsafe_allow_html=True)
     
     with st.expander("📊 View Stable Rooms (PSI > 1000)", expanded=False):
         stable_sorted = stable.sort_values('PSI', ascending=False)
@@ -353,25 +372,30 @@ with st.expander("📋 View Complete Inventory", expanded=False):
 
 # Summary statistics
 st.markdown("---")
-
-
-st.subheader("📊 Inventory Summary")
+st.markdown("### 📊 Inventory Summary")
 
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
     st.metric("Total Rooms", len(df))
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
     st.metric("Gas Types", df['Gas_Type'].nunique())
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with col3:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
     st.metric("Avg PSI", f"{df['PSI'].mean():.0f}")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with col4:
+    st.markdown('<div class="card">', unsafe_allow_html=True)
     if 'Days_Remaining' in df.columns:
         st.metric("Avg Days Left", f"{df['Days_Remaining'].mean():.1f}")
-
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Detailed Forecast View
 if forecast:
@@ -381,6 +405,7 @@ if forecast:
         
         for room, data in forecast.get('room_forecasts', {}).items():
             if 'error' not in data:
+                st.markdown('<div class="card">', unsafe_allow_html=True)
                 st.markdown(f"#### {room}")
                 
                 col1, col2, col3, col4 = st.columns(4)
@@ -401,19 +426,31 @@ if forecast:
                     color = "🔴" if days_left < 2 else "🟡" if days_left < 5 else "🟢"
                     st.metric("Days to Critical", f"{color} {days_left:.1f}")
                 
-                # Recommendation
+                # Recommendation with proper styling
                 recommendation = data.get('recommendation', 'UNKNOWN')
+                rec_text = recommendation.replace('_', ' ').title()
+                
                 if recommendation == 'SWAP_IMMEDIATELY':
-                    st.error(f"🚨 **{recommendation.replace('_', ' ')}**")
+                    st.markdown(f'<div class="critical-alert">🚨 <strong>{rec_text}</strong></div>', unsafe_allow_html=True)
                 elif recommendation in ['ORDER_TODAY_URGENT', 'ORDER_THIS_WEEK']:
-                    st.warning(f"⚠️ **{recommendation.replace('_', ' ')}**")
+                    st.markdown(f'<div class="warning-alert">⚠️ <strong>{rec_text}</strong></div>', unsafe_allow_html=True)
                 elif recommendation == 'MONITOR_CLOSELY':
-                    st.info(f"👀 **{recommendation.replace('_', ' ')}**")
+                    st.info(f"👀 **{rec_text}**")
                 else:
-                    st.success(f"✅ **{recommendation.replace('_', ' ')}**")
+                    st.markdown(f'<div class="success-alert">✅ <strong>{rec_text}</strong></div>', unsafe_allow_html=True)
                 
+                st.markdown('</div>', unsafe_allow_html=True)
                 st.markdown("---")
-                
+
+# Footer
+st.markdown("---")
+st.markdown("""
+<div style="text-align: center; color: #767676; padding: 20px;">
+    <small>Gas Tracker Dashboard | University of Chicago Energy Research Center<br>
+    Built with ❤️ for building management efficiency</small>
+</div>
+""", unsafe_allow_html=True)
+
 # Auto-refresh logic
 if auto_refresh:
     time.sleep(refresh_interval)
