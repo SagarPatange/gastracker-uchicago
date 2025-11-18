@@ -1,0 +1,140 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                    GAS TRACKER - QUICK REFERENCE                              ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+📁 WHAT'S IN THIS FOLDER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+app.py                      Main dashboard (cloud version with file upload)
+requirements.txt            Python dependencies
+Sample_Inventory.xlsx       Example Excel file template
+README.md                   Project overview
+DEPLOYMENT_GUIDE.md         Step-by-step deployment instructions
+USER_GUIDE.md               Instructions for building manager
+setup.sh                    Automated setup script
+.gitignore                  Git ignore file
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ QUICK DEPLOY (5 MINUTES)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+METHOD 1: Automated (Easiest)
+──────────────────────────────
+cd GasTracker_Cloud_Ready
+./setup.sh
+
+Follow the prompts!
+
+
+METHOD 2: Manual
+────────────────
+# 1. Initialize git
+git init
+git add .
+git commit -m "Initial commit"
+
+# 2. Create repo on GitHub
+Go to: github.com/new
+Name: gastracker-uchicago
+Public repo
+
+# 3. Push to GitHub
+git remote add origin https://github.com/YOUR-USERNAME/gastracker-uchicago.git
+git branch -M main
+git push -u origin main
+
+# 4. Deploy to Streamlit
+Go to: share.streamlit.io
+Click "New app"
+Select your repo
+Deploy!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔐 AFTER FUNDING APPROVAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Upgrade to Teams ($20/month)
+   Settings → Billing → Upgrade
+
+2. Enable Password Protection
+   App Settings → Sharing → Require login
+
+3. Add Authorized Users
+   Enter building manager's email
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📧 SEND TO BUILDING MANAGER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Subject: Gas Tracker Dashboard - Ready!
+
+Hi [Name],
+
+Your Gas Tracker Dashboard is live!
+
+🔗 Link: https://your-app.streamlit.app
+
+📋 How to use:
+1. Click the link
+2. Upload your Excel file (left sidebar)
+3. View alerts
+
+Bookmark for daily use!
+
+Questions? Call/text: [your number]
+
+-Saggy
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🆘 TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Build failed?
+→ Check logs in Streamlit dashboard
+
+Module not found?
+→ Update requirements.txt, push to GitHub
+
+Can't push to GitHub?
+→ Check GitHub username in remote URL
+
+Need help?
+→ See DEPLOYMENT_GUIDE.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ DEPLOYMENT CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+□ Git initialized
+□ Code pushed to GitHub (public repo)
+□ App deployed to Streamlit Cloud
+□ App URL works in browser
+□ File upload tested
+□ Sample data displays correctly
+□ Building manager notified
+□ (Later) Funding approved
+□ (Later) Upgraded to Teams
+□ (Later) Password protection enabled
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 YOUR WORKFLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TODAY:
+1. Deploy to free tier (5 minutes)
+2. Test with Sample_Inventory.xlsx
+3. Send funding request to Professor Liu
+
+AFTER APPROVAL:
+1. Upgrade to Teams
+2. Enable password protection
+3. Send secure link to building manager
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+That's it! Everything you need is in this folder. 🚀
