@@ -1,155 +1,263 @@
 /* ============================================
-   GAS TRACKER DASHBOARD - CUSTOM STYLES
+   GAS TRACKER DASHBOARD - ENHANCED STYLES
    ============================================ */
 
-/* === UChicago Branding === */
+/* === Color Palette === */
 :root {
     --uchicago-maroon: #800000;
-    --uchicago-dark-gray: #767676;
+    --uchicago-maroon-dark: #600000;
+    --uchicago-maroon-light: #a00000;
+    --uchicago-gray: #767676;
     --uchicago-light-gray: #D6D6CE;
     --critical-red: #ff1744;
     --warning-orange: #ff8c00;
     --success-green: #20c997;
+    --background-light: #f8f9fa;
+    --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --card-shadow-hover: 0 4px 16px rgba(0,0,0,0.15);
 }
 
-/* === Main Layout === */
+/* === Global Styles === */
 .main {
-    background-color: #f8f9fa;
+    background-color: var(--background-light);
 }
 
-/* === Headers === */
+/* === Typography === */
 h1 {
     color: var(--uchicago-maroon) !important;
-    font-weight: 700;
+    font-weight: 700 !important;
     border-bottom: 3px solid var(--uchicago-maroon);
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
 h2 {
-    color: var(--uchicago-dark-gray);
-    font-weight: 600;
+    color: var(--uchicago-gray) !important;
+    font-weight: 600 !important;
 }
 
 h3 {
-    color: var(--uchicago-maroon);
-    font-weight: 600;
+    color: var(--uchicago-maroon) !important;
+    font-weight: 600 !important;
 }
 
-/* === Sidebar === */
+h4 {
+    color: var(--uchicago-gray) !important;
+    font-weight: 600 !important;
+}
+
+/* === Sidebar Styling === */
 [data-testid="stSidebar"] {
-    background-color: #ffffff;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
     border-right: 2px solid var(--uchicago-light-gray);
 }
 
 [data-testid="stSidebar"] h1,
 [data-testid="stSidebar"] h2,
 [data-testid="stSidebar"] h3 {
-    color: var(--uchicago-maroon);
+    color: var(--uchicago-maroon) !important;
 }
 
-/* === Metrics === */
+/* === Metrics Enhanced === */
 [data-testid="stMetricValue"] {
     font-size: 2.5rem !important;
     font-weight: bold !important;
+    background: linear-gradient(135deg, var(--uchicago-maroon) 0%, var(--uchicago-maroon-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 [data-testid="stMetricLabel"] {
     font-size: 1rem !important;
     font-weight: 600 !important;
-    color: var(--uchicago-dark-gray);
+    color: var(--uchicago-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* === Alert Boxes === */
+[data-testid="stMetricDelta"] {
+    font-size: 0.875rem !important;
+}
+
+/* === Alert Boxes with Animations === */
 .critical-alert {
     background: linear-gradient(135deg, #ff4b4b 0%, var(--critical-red) 100%);
     padding: 1.5rem;
-    border-radius: 0.8rem;
+    border-radius: 12px;
     color: white;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: var(--card-shadow);
     margin: 1rem 0;
+    border-left: 5px solid #c41230;
+    animation: slideIn 0.3s ease-out;
 }
 
 .warning-alert {
     background: linear-gradient(135deg, #ffa500 0%, var(--warning-orange) 100%);
     padding: 1.5rem;
-    border-radius: 0.8rem;
+    border-radius: 12px;
     color: white;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: var(--card-shadow);
     margin: 1rem 0;
+    border-left: 5px solid #cc7000;
+    animation: slideIn 0.3s ease-out;
 }
 
 .success-alert {
     background: linear-gradient(135deg, #28a745 0%, var(--success-green) 100%);
     padding: 1.5rem;
-    border-radius: 0.8rem;
+    border-radius: 12px;
     color: white;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: var(--card-shadow);
     margin: 1rem 0;
+    border-left: 5px solid #17865b;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === Professional Cards === */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+}
+
+/* === Hero Section === */
+.hero-section {
+    background: linear-gradient(135deg, var(--uchicago-maroon) 0%, var(--uchicago-maroon-dark) 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    color: white;
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+.hero-section h2 {
+    margin: 0;
+    color: white !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.hero-section p {
+    margin: 0.5rem 0 0 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
 }
 
 /* === Buttons === */
 .stButton>button {
-    background-color: var(--uchicago-maroon);
+    background: linear-gradient(135deg, var(--uchicago-maroon) 0%, var(--uchicago-maroon-dark) 100%);
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     font-weight: 600;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.5rem;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
 }
 
 .stButton>button:hover {
-    background-color: #600000;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, var(--uchicago-maroon-dark) 0%, #400000 100%);
+    box-shadow: 0 4px 12px rgba(128, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.stButton>button:active {
+    transform: translateY(0);
+}
+
+/* === Download Button === */
+.stDownloadButton>button {
+    background: linear-gradient(135deg, var(--success-green) 0%, #17a673 100%);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.stDownloadButton>button:hover {
+    background: linear-gradient(135deg, #17a673 0%, #128a5e 100%);
+    box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
     transform: translateY(-2px);
 }
 
 /* === File Uploader === */
 [data-testid="stFileUploader"] {
     background-color: white;
-    border: 2px dashed var(--uchicago-light-gray);
-    border-radius: 8px;
-    padding: 1rem;
+    border: 2px dashed var(--uchicago-maroon);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+[data-testid="stFileUploader"]:hover {
+    border-color: var(--uchicago-maroon-light);
+    background-color: #fff5f5;
 }
 
 /* === DataFrames/Tables === */
 [data-testid="stDataFrame"] {
     border: 1px solid var(--uchicago-light-gray);
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+
+/* Make table headers stand out */
+[data-testid="stDataFrame"] thead tr th {
+    background: linear-gradient(135deg, var(--uchicago-maroon) 0%, var(--uchicago-maroon-dark) 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem !important;
 }
 
 /* === Expander === */
 [data-testid="stExpander"] {
     background-color: white;
     border: 1px solid var(--uchicago-light-gray);
-    border-radius: 8px;
+    border-radius: 12px;
     margin: 0.5rem 0;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
 }
 
-/* === Info/Warning/Error Boxes === */
+[data-testid="stExpander"]:hover {
+    box-shadow: var(--card-shadow-hover);
+}
+
+/* === Info/Warning/Error/Success Boxes === */
 .stAlert {
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 1rem;
+    border-left: 5px solid;
 }
 
-/* === Download Button === */
-.stDownloadButton>button {
-    background-color: var(--success-green);
-    color: white;
-    border-radius: 5px;
-    font-weight: 600;
-}
-
-.stDownloadButton>button:hover {
-    background-color: #1aa179;
-}
-
-/* === Caption Text === */
-.caption {
-    color: var(--uchicago-dark-gray);
-    font-size: 0.875rem;
+[data-baseweb="notification"] {
+    border-radius: 12px !important;
 }
 
 /* === Divider === */
@@ -159,60 +267,215 @@ hr {
     margin: 2rem 0;
 }
 
-/* === Big Metric (Custom Class) === */
-.big-metric {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--uchicago-maroon);
-}
-
-/* === Professional Cards === */
-.card {
-    background: white;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin: 1rem 0;
-}
-
-.card:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    transition: box-shadow 0.3s ease;
-}
-
 /* === Status Badges === */
 .status-badge {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
     font-weight: 600;
     font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .status-critical {
-    background-color: var(--critical-red);
+    background: linear-gradient(135deg, var(--critical-red) 0%, #c41230 100%);
     color: white;
+    box-shadow: 0 2px 4px rgba(255, 23, 68, 0.3);
 }
 
 .status-warning {
-    background-color: var(--warning-orange);
+    background: linear-gradient(135deg, var(--warning-orange) 0%, #cc7000 100%);
     color: white;
+    box-shadow: 0 2px 4px rgba(255, 140, 0, 0.3);
 }
 
 .status-stable {
-    background-color: var(--success-green);
+    background: linear-gradient(135deg, var(--success-green) 0%, #17865b 100%);
     color: white;
+    box-shadow: 0 2px 4px rgba(32, 201, 151, 0.3);
 }
 
-/* === Responsive Design === */
+/* === Spinner/Loading === */
+[data-testid="stSpinner"] > div {
+    border-top-color: var(--uchicago-maroon) !important;
+}
+
+/* === Progress Bar === */
+.stProgress > div > div {
+    background-color: var(--uchicago-maroon);
+}
+
+/* === Tabs === */
+[data-baseweb="tab-list"] {
+    gap: 8px;
+}
+
+[data-baseweb="tab"] {
+    border-radius: 8px 8px 0 0;
+    background-color: white;
+    border: 1px solid var(--uchicago-light-gray);
+}
+
+[aria-selected="true"] {
+    background: linear-gradient(135deg, var(--uchicago-maroon) 0%, var(--uchicago-maroon-dark) 100%) !important;
+    color: white !important;
+}
+
+/* === Tooltips === */
+[data-testid="stTooltipIcon"] {
+    color: var(--uchicago-maroon);
+}
+
+/* === Empty State === */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    margin: 2rem 0;
+}
+
+.empty-state-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* === Chart Improvements === */
+[data-testid="stArrowVegaLiteChart"] {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: var(--card-shadow);
+}
+
+/* === Mobile Responsiveness === */
 @media (max-width: 768px) {
-    [data-testid="stMetricValue"] {
+    h1 {
         font-size: 1.5rem !important;
+        padding-bottom: 8px;
+    }
+    
+    h2 {
+        font-size: 1.25rem !important;
+    }
+    
+    h3 {
+        font-size: 1.1rem !important;
+    }
+    
+    [data-testid="stMetricValue"] {
+        font-size: 1.8rem !important;
+    }
+    
+    [data-testid="stMetricLabel"] {
+        font-size: 0.875rem !important;
+    }
+    
+    .card {
+        padding: 1rem;
+        margin: 0.75rem 0;
     }
     
     .critical-alert,
     .warning-alert,
     .success-alert {
         padding: 1rem;
+        font-size: 0.9rem;
     }
+    
+    .hero-section {
+        padding: 1.5rem;
+    }
+    
+    .hero-section h2 {
+        font-size: 1.25rem !important;
+    }
+    
+    .hero-section p {
+        font-size: 0.9rem;
+    }
+    
+    .stButton>button {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    /* Stack columns on mobile */
+    [data-testid="column"] {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+}
+
+/* === Tablet Responsiveness === */
+@media (max-width: 1024px) and (min-width: 769px) {
+    [data-testid="stMetricValue"] {
+        font-size: 2rem !important;
+    }
+    
+    .card {
+        padding: 1.25rem;
+    }
+}
+
+/* === Print Styles === */
+@media print {
+    [data-testid="stSidebar"],
+    .stButton,
+    .stDownloadButton {
+        display: none !important;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* === Accessibility === */
+button:focus,
+[data-testid="stFileUploader"]:focus-within {
+    outline: 3px solid var(--uchicago-maroon);
+    outline-offset: 2px;
+}
+
+/* === Custom Scrollbar === */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--uchicago-maroon);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--uchicago-maroon-dark);
+}
+
+/* === Footer === */
+.footer {
+    text-align: center;
+    color: var(--uchicago-gray);
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    border-top: 2px solid var(--uchicago-light-gray);
+}
+
+.footer small {
+    opacity: 0.8;
+    line-height: 1.6;
 }
